@@ -1,0 +1,11 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.subzerodigital.takenote.HomeListActivity" >
+
+    <item
+        android:id="@+id/AddNewNote"
+        android:showAsAction="always|withText"
+        android:title="@string/add_new_note">
+    </item>
+
+</menu>
