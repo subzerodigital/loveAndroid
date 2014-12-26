@@ -1,8 +1,12 @@
 package com.subzerodigital.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class NoteItem {
+public class NoteItem implements Serializable {
+	
+	private static final long serialVersionUID = -289677682208765221L;
+	
 	private String title;
 	private Date date;
 	private String text;
