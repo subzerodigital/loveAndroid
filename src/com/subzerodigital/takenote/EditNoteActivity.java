@@ -8,9 +8,10 @@ import java.util.Date;
 import java.util.TimeZone;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,6 +22,8 @@ import android.widget.EditText;
 import com.subzerodigital.entity.NoteItem;
 
 public class EditNoteActivity extends Activity {
+
+	public static final int RESULT_DELETE = -500;
 
 	// var to track / flags
 	private boolean isInEditMode = true;
@@ -134,9 +137,36 @@ public class EditNoteActivity extends Activity {
 		// automatically handle clicks on the Home/Up button, so long
 		// as you specify a parent activity in AndroidManifest.xml.
 		int id = item.getItemId();
-		if (id == R.id.action_settings) {
+		/*
+		Log.i("subzero",id+"");
+		Log.i("subzero",R.id.deleteNote+"");
+		*/
+		
+		if (id == R.id.deleteNote) {
+			//TODO: ASK WHY, why static class could also instanciate object
+			AlertDialog.Builder builder = new AlertDialog.Builder(this);
+			builder.setMessage(R.string.are_you_sure);
+			builder.setTitle(R.string.please_confirm);
+			builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					// TODO Auto-generated method stub
+					Intent returnIntent = new Intent();
+					setResult(RESULT_DELETE,returnIntent);
+					finish();
+				}
+			});
+			builder.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					// TODO Auto-generated method stub
+					
+				}
+			});
+			builder.show();
 			return true;
+		}else{
+			return false;
 		}
-		return super.onOptionsItemSelected(item);
 	}
 }

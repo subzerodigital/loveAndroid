@@ -9,10 +9,13 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.ContextMenu;
+import android.view.ContextMenu.ContextMenuInfo;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -55,6 +58,9 @@ public class HomeListActivity extends Activity {
 		homeList.add(new NoteItem("2nd followd", new Date(), "body text2"));
 		homeList.add(new NoteItem("last one is here", new Date(), "body text3"));
 		reRenderList(homeList);
+		//register context menu
+		registerForContextMenu(homeListView);
+		
 	}
 
 	@Override
@@ -86,6 +92,23 @@ public class HomeListActivity extends Activity {
 		return super.onOptionsItemSelected(item);
 	}
 	
+	@Override
+	public void onCreateContextMenu(ContextMenu menu, View v,
+			ContextMenuInfo menuInfo) {
+		// TODO Auto-generated method stub
+		super.onCreateContextMenu(menu, v, menuInfo);
+		getMenuInflater().inflate(R.menu.context_menu, menu);
+	}
+	
+	@Override
+	public boolean onContextItemSelected(MenuItem item) {
+		AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
+		homeList.remove(info.position);
+		reRenderList(homeList);
+		return true;
+	}
+	
+	
 	private void reRenderList(List<NoteItem> homeList) {
 		List<String> titles = new ArrayList<String>();
 		for (NoteItem noteItem : homeList) {
@@ -104,6 +127,16 @@ public class HomeListActivity extends Activity {
 		
 		if(resultCode==RESULT_CANCELED){
 			Log.i("subzero","do not bother, canceled");
+			return;
+		}
+		
+		if(resultCode == EditNoteActivity.RESULT_DELETE){
+			Log.i("subzero","delete the current note");
+			if(currentEditing>-1){
+				homeList.remove(currentEditing);
+				currentEditing = -1;
+				reRenderList(homeList);
+			}
 			return;
 		}
 		
