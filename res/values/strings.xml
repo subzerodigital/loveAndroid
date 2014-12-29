@@ -10,5 +10,7 @@
     <string name="are_you_sure">Are you sure? This action can not be undone.</string>
     <string name="please_confirm">Please confirm</string>
     <string name="title_activity_async_task">AsyncTask</string>
+    <string name="title_activity_fragment">FragmentActivity</string>
+    <string name="title_activity_asyc_task">Asyc Task Activity</string>
 
 </resources>

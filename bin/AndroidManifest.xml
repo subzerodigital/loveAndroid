@@ -8,6 +8,9 @@
         android:minSdkVersion="17"
         android:targetSdkVersion="19" />
 
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
@@ -20,15 +23,23 @@
         <activity
             android:name=".HomeListActivity"
             android:label="@string/title_activity_home_list" >
+        </activity>
+        <activity
+            android:name=".AsyncTask"
+            android:label="@string/title_activity_async_task" >
+        </activity>
+        <activity
+            android:name=".FragmentActivity"
+            android:label="@string/title_activity_fragment" >
+        </activity>
+        <activity
+            android:name=".AsycTaskActivity"
+            android:label="@string/title_activity_asyc_task" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity
-            android:name=".AsyncTask"
-            android:label="@string/title_activity_async_task" >
         </activity>
     </application>
 
